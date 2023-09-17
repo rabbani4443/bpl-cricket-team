@@ -2,7 +2,9 @@
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
 
-const Cart = () => {
+const Cart = ({addPlayers}) => {
+    console.log(addPlayers)
+
     return (
         <div>
             <div className='mx-auto'>

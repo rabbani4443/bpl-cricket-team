@@ -5,17 +5,27 @@ import './Cards.css'
 
 const Cards = () => {
     const [allPlayers, setAllPlayers] = useState([]);
+    const [addPlayers, setAddPlayers] =useState([])
 
     useEffect(()=>{
         fetch('data.json')
         .then((res) => res.json())
         .then(data => setAllPlayers(data))
     },[])
-//    console.log(allPlayers)
+  // console.log(allPlayers)
 
- const handelAddPlayer =()=>{
-    console.log('hello world')
- }
+
+ const handelAddPlayer =(resPlayer)=>{
+    const isExist = addPlayers.find( item=> item.id === resPlayer.id)
+    console.log(isExist)
+
+    if (isExist) {
+       return alert("allred book")
+    }else{
+        setAddPlayers([...addPlayers, resPlayer])
+    }
+ };
+// console.log(addPlayers)
 
     return (
     <>
@@ -30,7 +40,7 @@ const Cards = () => {
                         <tbody >
                             <tr  >
                                 <th >Name </th> 
-                                <td className='font-medium whitespace-nowrap	 '>: {player.name} </td>
+                                <td className='font-medium whitespace-nowrap'>: {player.name} </td>
                             </tr>
                             <tr>
                                  <th >Age </th> 
@@ -49,7 +59,7 @@ const Cards = () => {
                     </table>
                 </div>
                 <div className='text-center py-5'>
-                    <button onClick={handelAddPlayer} className='text-white rounded-lg text-lg  bg-[#0158da] px-5  py-1 add-button'>Add this player</button>
+                    <button onClick={()=>handelAddPlayer(player)} className='text-white rounded-lg text-lg  bg-[#0158da] px-5  py-1 add-button'>Add this player</button>
                 </div>
                 </div>
             ))
@@ -58,7 +68,7 @@ const Cards = () => {
 
         {/* Cart Section ============= */}
         <div className='lg:w-1/4 w-3/4  mx-auto'>
-        <Cart></Cart>
+        <Cart addPlayers={addPlayers} ></Cart>
         </div>
         </div>
 
