@@ -1,0 +1,9 @@
+.bpl-background-image{
+    background: url(https://i.ibb.co/J7SPdSb/stadium.jpg),linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5));
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-attachment: fixed;
+    height: 1000px;
+}

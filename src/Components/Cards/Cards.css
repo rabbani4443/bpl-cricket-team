@@ -1,0 +1,10 @@
+.player:hover{
+    transform: translate(3px,-3px);
+    box-shadow: 5px 5px 30px black;
+    transition: 0.4s;
+}
+.add-button:hover{
+    transform: translate(2px,-2px);
+    box-shadow: 3px 3px 10px black;
+    transition: 0.4s;
+}
