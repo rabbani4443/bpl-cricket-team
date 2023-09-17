@@ -3,13 +3,15 @@ import { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import './Cards.css'
 import { BsCheckAll } from 'react-icons/bs';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Cards = () => {
     const [allPlayers, setAllPlayers] = useState([]);
     const [addPlayers, setAddPlayers] =useState([]);
     const [buttonTexts, setButtonTexts] = useState({});
     const [totalCost, setTotalCost] = useState(0);
-    const [totalRemaining,setTotalRemaining] = useState(50000)
+    const [totalRemaining,setTotalRemaining] = useState(4000)
 
 
     useEffect(()=>{
@@ -26,18 +28,27 @@ const Cards = () => {
 
     let playerSalary = resPlayer.salary;
     if (isExist) {
-       return alert("allred book")
+       return toast.warn(' Wow so easy!', {
+        theme: "colored",
+        });
     }else{
         
+        if(addPlayers.length > 6){
+            return toast.warn(' You can hire just 07 players!', {
+                theme: "dark",
+                });
+        }
 
         addPlayers.forEach(price =>{
             playerSalary = playerSalary + price.salary
         });
         // console.log(playerSalary)
-        const totalPriceRemaining = 5000 - playerSalary;
+        const totalPriceRemaining = 4000 - playerSalary;
         
-        if (playerSalary > 5000) {
-            return alert(' your blances over')
+        if (playerSalary > 4000) {
+            return toast.warn(' Your balance is over!', {
+                theme: "colored",
+                });
         }else{
             setTotalCost(playerSalary)
             setTotalRemaining (totalPriceRemaining);
@@ -100,7 +111,7 @@ const Cards = () => {
         <Cart addPlayers={addPlayers} totalCost={totalCost} totalRemaining={totalRemaining}></Cart>
         </div>
         </div>
-
+        <ToastContainer />
     </>
     );
 };

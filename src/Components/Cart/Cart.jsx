@@ -3,12 +3,11 @@ import { BsCheckCircleFill } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
 
 const Cart = ({addPlayers,totalCost,totalRemaining}) => {
-    // console.log(addPlayers)
 
     return (
         <div>
             <div className='mx-auto'>
-            <h1 className="text-2xl pb-4 font-semibold text-[#ffa253] flex justify-center items-center"> <span className='pr-3' > <FaUserAlt></FaUserAlt></span> Players Added : {addPlayers.length} </h1>
+            <h1 className="text-2xl pb-4 font-semibold text-[#ffa253] flex justify-center items-center"> <span className='pr-3' > <FaUserAlt></FaUserAlt></span> Players Added : {addPlayers.length}</h1>
             <h1 className="text-2xl pb-4  font-semibold text-[#ffa253] text-center "> Total Cost : ${totalCost} </h1>
             <h1 className="text-2xl pb-4  font-semibold text-[#ffa253] text-center "> Remaining : ${totalRemaining} </h1>
             </div>
