@@ -8,6 +8,8 @@ const Cards = () => {
     const [allPlayers, setAllPlayers] = useState([]);
     const [addPlayers, setAddPlayers] =useState([]);
     const [buttonTexts, setButtonTexts] = useState({});
+    const [totalCost, setTotalCost] = useState(0);
+    const [totalRemaining,setTotalRemaining] = useState(50000)
 
 
     useEffect(()=>{
@@ -20,18 +22,27 @@ const Cards = () => {
 
  const handelAddPlayer =(resPlayer)=>{
     const isExist = addPlayers.find( item=> item.id === resPlayer.id)
-    console.log(isExist)
+    // console.log(isExist)
 
-    let price = 0;
+    let playerSalary = resPlayer.salary;
     if (isExist) {
        return alert("allred book")
     }else{
-        setAddPlayers([...addPlayers, resPlayer])
-
         
 
-
-
+        addPlayers.forEach(price =>{
+            playerSalary = playerSalary + price.salary
+        });
+        // console.log(playerSalary)
+        const totalPriceRemaining = 5000 - playerSalary;
+        
+        if (playerSalary > 5000) {
+            return alert(' your blances over')
+        }else{
+            setTotalCost(playerSalary)
+            setTotalRemaining (totalPriceRemaining);
+        }
+        setAddPlayers([...addPlayers, resPlayer])
         setButtonTexts(prevTexts => ({ ...prevTexts, [resPlayer.id]: <div className=' flex items-center'>
             <div className='rounded-full h-max text-white text-2xl '> 
             <BsCheckAll ></BsCheckAll>  </div>
@@ -86,7 +97,7 @@ const Cards = () => {
 
         {/* Cart Section ============= */}
         <div className='lg:w-1/4 w-3/4  mx-auto'>
-        <Cart addPlayers={addPlayers} ></Cart>
+        <Cart addPlayers={addPlayers} totalCost={totalCost} totalRemaining={totalRemaining}></Cart>
         </div>
         </div>
 
