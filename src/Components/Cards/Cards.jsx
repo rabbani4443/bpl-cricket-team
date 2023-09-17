@@ -2,10 +2,13 @@
 import { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import './Cards.css'
+import { BsCheckAll } from 'react-icons/bs';
 
 const Cards = () => {
     const [allPlayers, setAllPlayers] = useState([]);
-    const [addPlayers, setAddPlayers] =useState([])
+    const [addPlayers, setAddPlayers] =useState([]);
+    const [buttonTexts, setButtonTexts] = useState({});
+
 
     useEffect(()=>{
         fetch('data.json')
@@ -19,10 +22,21 @@ const Cards = () => {
     const isExist = addPlayers.find( item=> item.id === resPlayer.id)
     console.log(isExist)
 
+    let price = 0;
     if (isExist) {
        return alert("allred book")
     }else{
         setAddPlayers([...addPlayers, resPlayer])
+
+        
+
+
+
+        setButtonTexts(prevTexts => ({ ...prevTexts, [resPlayer.id]: <div className=' flex items-center'>
+            <div className='rounded-full h-max text-white text-2xl '> 
+            <BsCheckAll ></BsCheckAll>  </div>
+            <div className='text-white '>Player Added </div>
+        </div>  }));
     }
  };
 // console.log(addPlayers)
@@ -59,7 +73,11 @@ const Cards = () => {
                     </table>
                 </div>
                 <div className='text-center py-5'>
-                    <button onClick={()=>handelAddPlayer(player)} className='text-white rounded-lg text-lg  bg-[#0158da] px-5  py-1 add-button'>Add this player</button>
+                    <button 
+                    onClick={()=>handelAddPlayer(player)} 
+                    className='text-white rounded-lg text-lg  bg-[#0158da] px-5  py-1 add-button'>
+                        {buttonTexts[player.id] || "Add this player"}
+                    </button>
                 </div>
                 </div>
             ))
